@@ -9,6 +9,3 @@ services:
       - "3000:3000"
     depends_on:
       - redis
-    environment:
-      - API_KEY=YOUR_API_KEY
-      - REDIS_URL=redis://redis:6379

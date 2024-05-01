@@ -38,4 +38,4 @@ next-env.d.ts
 # logs
 logs
 
-!.env.local.example
+!.env.example

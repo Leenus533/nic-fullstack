@@ -12,11 +12,7 @@
    cd nic-project
    ```
 
-2. Modify Docker Compose environment variables:
-
-   - Set `API_KEY` to your Motorpointarenanottingham API Key
-
-3. Create a .env.local with the .env.local.example provided replacing it with your api keys
+2. Create a .env file in the same way as .env.example but replace with your own API_KEY
 
 # Running the Project
 

@@ -97,12 +97,6 @@ const DisplayEvents = ({
 
   return (
     <div>
-      <button
-        className="flex items-center justify-around text-black py-4 border-b-2 border-black-300 border-solid mb-2 rounded"
-        onClick={() => console.log(filteredData)}
-      >
-        testing
-      </button>
       <div className="flex items-center justify-around text-black py-4 border-b-2 border-gray-300 border-solid mb-2 rounded">
         <EventSelect eventType={eventType} eventTypes={eventTypes} />
         <CategorySelect
