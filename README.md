@@ -34,7 +34,7 @@ You can test it out with the following curl command:
 
 ```
 
-curl -X GET -H "x-api-key:YOUR_API_KEY" https://localhost:3000/api/tickets
+curl -X GET -H "x-api-key:YOUR_API_KEY" http://localhost:3000/api/tickets
 
 ```
 

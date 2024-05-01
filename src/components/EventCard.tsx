@@ -1,5 +1,4 @@
 import React from "react"
-import Image from "next/image"
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card"
 import { DataObject } from "../app/events/[type]/ApiReturn.types"
 import EventDates from "./EventDates"

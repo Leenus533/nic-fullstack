@@ -1,4 +1,3 @@
-//@ts-nocheck
 import { DataObject } from "@/app/events/[type]/ApiReturn.types"
 import { format, parseISO, getYear, getMonth } from "date-fns"
 
@@ -7,7 +6,7 @@ interface DateGroups {
 }
 
 const EventDates = ({ prop }: { prop: DataObject }) => {
-  const formatDates = (dates: any[] | undefined) => {
+  const formatDates = (dates: string[] | undefined) => {
     if (!dates || dates.length === 0) return ""
 
     const groupedDates = dates.reduce<DateGroups>(
@@ -24,7 +23,7 @@ const EventDates = ({ prop }: { prop: DataObject }) => {
         // Add only unique dates
         if (
           !acc[key].find(
-            (d: any) =>
+            (d: Date) =>
               format(d, "yyyy-MM-dd") === format(parsedDate, "yyyy-MM-dd")
           )
         ) {
@@ -38,8 +37,10 @@ const EventDates = ({ prop }: { prop: DataObject }) => {
     const formattedDates: string[] = []
 
     Object.values(groupedDates).forEach((group) => {
-      const sortedDates = group.sort((a: number, b: number) => a - b)
-      const dateStrings = sortedDates.map((date: any) => format(date, "EEE d"))
+      const sortedDates = group.sort(
+        (a: Date, b: Date) => a.getTime() - b.getTime()
+      )
+      const dateStrings = sortedDates.map((date: Date) => format(date, "EEE d"))
       const lastDateString = dateStrings.pop()
       const monthYear = format(sortedDates[0], "MMMM yyyy") //
 

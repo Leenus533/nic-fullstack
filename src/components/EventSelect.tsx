@@ -11,7 +11,13 @@ import {
 } from "@/components/ui/select"
 import { useRouter } from "next/navigation"
 
-const EventSelect = ({ eventType, eventTypes }: any) => {
+const EventSelect = ({
+  eventType,
+  eventTypes,
+}: {
+  eventType: string
+  eventTypes: string[]
+}) => {
   const router = useRouter()
   return (
     <div className="flex  justify-center items-center">

@@ -7,7 +7,15 @@ import Fuse from "fuse.js"
 import EventCard from "../../../components/EventCard"
 import MonthSelect from "@/components/MonthSelect"
 
-const DisplayEvents = ({ data, eventType, eventTypes }: any) => {
+const DisplayEvents = ({
+  data,
+  eventType,
+  eventTypes,
+}: {
+  data: DataObject[]
+  eventType: string
+  eventTypes: string[]
+}) => {
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedMonth, setSelectedMonth] = useState("0")
 
