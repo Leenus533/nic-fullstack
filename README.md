@@ -13,7 +13,10 @@
    ```
 
 2. Modify Docker Compose environment variables:
+
    - Set `API_KEY` to your Motorpointarenanottingham API Key
+
+3. Create a .env.local with the .env.local.example provided replacing it with your api keys
 
 # Running the Project
 
