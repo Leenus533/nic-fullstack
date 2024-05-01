@@ -33,7 +33,7 @@ const EventCard = ({ prop }: { prop: DataObject }) => {
             href={`https://tickets.motorpointarenanottingham.com/shows/Show.aspx?sh=${prop.fields.content_id}`}
             className="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs sm:text-sm py-2 sm:py-3 px-4 sm:px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
           >
-            Read More
+            Book Tickets
           </a>
         </div>
       </CardBody>
