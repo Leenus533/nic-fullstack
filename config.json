@@ -1,0 +1,4 @@
+{
+  "eventTypes": ["regular", "hospitality", "panther"],
+  "redisExpiryInSeconds": 3600
+}
