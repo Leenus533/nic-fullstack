@@ -1,11 +1,16 @@
 import Redis from "ioredis"
 
-const redisUrl = process.env.REDIS_URL
+let redisInstance: Redis | null = null
 
-if (!redisUrl) {
-  throw new Error("REDIS_URL environment variable is not defined")
+export function getRedisClient(): Redis {
+  if (!redisInstance) {
+    redisInstance = new Redis()
+    redisInstance.on("connect", () => console.log("Connected to Redis"))
+    redisInstance.on("error", (err) => console.error("Redis Client Error", err))
+  }
+  return redisInstance
 }
 
-const redis = new Redis(redisUrl)
+const redis = getRedisClient()
 
 export default redis
