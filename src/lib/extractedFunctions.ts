@@ -25,6 +25,18 @@ async function fetchDataFromAPI() {
   return data
 }
 
+async function checkAndPushApiKey(apiKey: string) {
+  try {
+    const position = await redis.lpos("authorizedApiKeys", apiKey)
+    if (position === null) {
+      await redis.lpush("authorizedApiKeys", apiKey)
+      console.log("API key added to the list.")
+    }
+  } catch (error) {
+    console.error("Error:", error)
+  }
+}
+
 async function getOrSetCache(cacheKey: string) {
   try {
     const cachedData = await redis.get(cacheKey)
@@ -35,12 +47,14 @@ async function getOrSetCache(cacheKey: string) {
     const data = await fetchDataFromAPI()
     const dataCombined = combineObjects(data)
     logger.info("Setting cache from formated data")
+
     await redis.set(
       cacheKey,
       JSON.stringify(dataCombined),
       "EX",
       config.redisExpiryInSeconds
     )
+    await checkAndPushApiKey(process.env.API_KEY || "erroredApiKey")
     return dataCombined
   } catch (err) {
     logger.error("Error with getting and setting cache data", err)

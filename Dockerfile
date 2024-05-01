@@ -14,6 +14,8 @@ RUN bun install
 # Copy the entire project to the working directory
 COPY . .
 
+ENV DOCKER_CONTAINER true
+
 # Build the Next.js application using Bun
 RUN bun run build
 
