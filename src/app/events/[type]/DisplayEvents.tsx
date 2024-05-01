@@ -6,6 +6,7 @@ import { Key, useState } from "react"
 import Fuse from "fuse.js"
 import EventCard from "../../../components/EventCard"
 import MonthSelect from "@/components/MonthSelect"
+import CategorySelect from "@/components/CategorySelect"
 
 const DisplayEvents = ({
   data,
@@ -18,8 +19,10 @@ const DisplayEvents = ({
 }) => {
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedMonth, setSelectedMonth] = useState("0")
+  const [selectedCategory, setSelectedCategory] = useState("All")
 
   const eventCountPerMonth: { [key: string]: Set<string> } = {}
+  const categoryCount: { [key: string]: number } = {}
 
   // Calculate event count per month for all events
   data.forEach((prop: DataObject) => {
@@ -34,6 +37,15 @@ const DisplayEvents = ({
         eventCountPerMonth[monthKey] = new Set()
       }
       eventCountPerMonth[monthKey].add(prop.id) // Add event ID to the set
+    })
+
+    // Update category count
+    const categories = prop.fields.genre || []
+    categories.forEach((category) => {
+      if (!categoryCount[category]) {
+        categoryCount[category] = 0
+      }
+      categoryCount[category]++
     })
   })
 
@@ -52,6 +64,12 @@ const DisplayEvents = ({
       const eventMonth = eventDate.getMonth() + 1
 
       const [selectedYear, selectedMonthId] = selectedMonth.split("-")
+
+      const isCorrectCategory =
+        selectedCategory === "All"
+          ? true
+          : prop.fields.genre && prop.fields.genre.includes(selectedCategory)
+
       const isCorrectMonth =
         selectedMonth === "0"
           ? true
@@ -64,7 +82,7 @@ const DisplayEvents = ({
           : prop.fields.event_types &&
             prop.fields.event_types.includes(eventType.toLowerCase()) //
 
-      return isCorrectMonth && isCorrectType
+      return isCorrectMonth && isCorrectType && isCorrectCategory
     })
   })
 
@@ -79,8 +97,20 @@ const DisplayEvents = ({
 
   return (
     <div>
+      <button
+        className="flex items-center justify-around text-black py-4 border-b-2 border-black-300 border-solid mb-2 rounded"
+        onClick={() => console.log(filteredData)}
+      >
+        testing
+      </button>
       <div className="flex items-center justify-around text-black py-4 border-b-2 border-gray-300 border-solid mb-2 rounded">
         <EventSelect eventType={eventType} eventTypes={eventTypes} />
+        <CategorySelect
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          categoryCount={categoryCount}
+          totalCount={filteredData.length}
+        />
         <MonthSelect
           selectedMonth={selectedMonth}
           setSelectedMonth={setSelectedMonth}
