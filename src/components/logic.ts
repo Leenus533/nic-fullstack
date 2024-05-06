@@ -13,7 +13,7 @@ function combineObjects(data: DataObject[]): DataObject[] {
     const when = event.fields.when?.toLowerCase() || ""
 
     if (offSaleDate > currentDate && currentDate > onSaleDate) {
-      const key: string = event.fields.thumbnail // Grouping by content ID and thumbnail
+      const key: string = event.fields.thumbnail // Grouping by thumbnail
 
       if (!groupedEvents[key]) {
         groupedEvents[key] = {

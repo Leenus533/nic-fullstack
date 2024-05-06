@@ -20,7 +20,6 @@ const EventDates = ({ prop }: { prop: DataObject }) => {
           acc[key] = []
         }
 
-        // Add only unique dates
         if (
           !acc[key].find(
             (d: Date) =>

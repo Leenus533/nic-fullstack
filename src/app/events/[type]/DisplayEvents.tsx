@@ -24,9 +24,8 @@ const DisplayEvents = ({
   const eventCountPerMonth: { [key: string]: Set<string> } = {}
   const categoryCount: { [key: string]: number } = {}
 
-  // Calculate event count per month for all events
   data.forEach((prop: DataObject) => {
-    const eventDates = prop.fields.dates || [prop.fields.date] // Use dates array if available or fallback to date
+    const eventDates = prop.fields.dates || [prop.fields.date]
 
     eventDates.forEach((date) => {
       const eventDate = new Date(date)
@@ -36,10 +35,9 @@ const DisplayEvents = ({
       if (!eventCountPerMonth[monthKey]) {
         eventCountPerMonth[monthKey] = new Set()
       }
-      eventCountPerMonth[monthKey].add(prop.id) // Add event ID to the set
+      eventCountPerMonth[monthKey].add(prop.id)
     })
 
-    // Update category count
     const categories = prop.fields.genre || []
     categories.forEach((category) => {
       if (!categoryCount[category]) {
@@ -49,7 +47,6 @@ const DisplayEvents = ({
     })
   })
 
-  // Convert each Set to its size (number of unique events per month)
   const uniqueEventCountPerMonth: { [key: string]: number } = {}
   Object.keys(eventCountPerMonth).forEach((key) => {
     uniqueEventCountPerMonth[key] = eventCountPerMonth[key].size

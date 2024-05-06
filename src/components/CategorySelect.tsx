@@ -22,7 +22,6 @@ const CategorySelect: React.FC<CategorySelectProps> = ({
 }) => {
   const categories = [
     "All",
-    "Club",
     "Concerts",
     "Experiences",
     "Family",
